@@ -14,13 +14,26 @@ jobs:
       - name: Clonar repositorio
         uses: actions/checkout@v3
 
+      - name: Cachear dependencias npm
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Instalar Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
+      - name: Verificar versiones
+        run: |
+          node -v
+          npm -v
+
       - name: Instalar dependencias
         run: npm install
 
       - name: Ejecutar pruebas
-        run: npm test
+        run: npm test -- --runInBand
