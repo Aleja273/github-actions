@@ -1,3 +1,11 @@
+
+
+on:
+  push:
+    branches: [principal]
+  pull_request:
+    branches: [principal]
+
 jobs:
   test:
     runs-on: ubuntu-latest
