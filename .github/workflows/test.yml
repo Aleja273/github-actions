@@ -2,27 +2,27 @@ name: Pruebas Automáticas
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Clonar repositorio
-      uses: actions/checkout@v3
+      - name: Clonar repositorio
+        uses: actions/checkout@v3
 
-    - name: Configurar Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: '20'
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-    - name: Instalar dependencias
-      run: npm install
+      - name: Instalar dependencias
+        run: npm install
 
-    - name: Ejecutar pruebas
-      run: npm test
+      - name: Dar permisos a jest
+        run: chmod +x ./node_modules/.bin/jest
 
-
+      - name: Ejecutar pruebas
+        run: npm test
